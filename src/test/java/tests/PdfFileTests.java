@@ -18,7 +18,7 @@ public class PdfFileTests {
         String expectedData = "How to download a file with Selenide";
 
         PDF pdf = getPdf(pdfFilePath);
-        assertThat(pdf, containsText(expectedData));
+        assertThat(pdf, PDF.containsText(expectedData));
     }
 
 }
