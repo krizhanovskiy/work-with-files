@@ -36,7 +36,6 @@ public class Files {
         return new XLS(getFile(path));
     }
 
-
     public static String readXlsxFromPath(String path){
         String result = "";
         XSSFWorkbook myExcelBook = null;
