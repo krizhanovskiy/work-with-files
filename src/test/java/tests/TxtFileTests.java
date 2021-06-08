@@ -9,6 +9,7 @@ import static org.hamcrest.Matchers.containsString;
 import static utils.Files.readTextFromPath;
 
 public class TxtFileTests {
+
     @Test
     void txtTest() throws IOException {
         String txtFilePath = "./src/test/resources/files/1.txt";
