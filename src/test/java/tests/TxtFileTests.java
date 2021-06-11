@@ -12,8 +12,8 @@ public class TxtFileTests {
 
     @Test
     void txtTest() throws IOException {
-        String txtFilePath = "./src/test/resources/files/1.txt";
-        String expectedData = "hello qa.guru students!";
+        String txtFilePath = "./src/test/resources/files/work_with_file_in_java.txt";
+        String expectedData = "Creating and Writing a File by Using Stream I/O";
 
         String actualData = readTextFromPath(txtFilePath);
 
@@ -22,8 +22,8 @@ public class TxtFileTests {
 
     @Test
     void csvTest() throws IOException {
-        String csvFilePath = "./src/test/resources/files/1.csv";
-        String expectedData = "hello qa.guru students!";
+        String csvFilePath = "./src/test/resources/files/work_with_file_in_java.csv";
+        String expectedData = "Creating and Writing a File by Using Stream I/O";
 
         String actualData = readTextFromPath(csvFilePath);
 

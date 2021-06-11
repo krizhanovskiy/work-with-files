@@ -3,17 +3,23 @@ package utils;
 import com.codeborne.pdftest.PDF;
 import com.codeborne.xlstest.XLS;
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.hwpf.HWPFDocument;
+import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
+
+import java.util.List;
 
 public class Files {
     public static String readTextFromFile(File file) throws IOException {
@@ -36,7 +42,7 @@ public class Files {
         return new XLS(getFile(path));
     }
 
-    public static String readXlsxFromPath(String path){
+    public static String readXlsxFromPath(String path) {
         String result = "";
         XSSFWorkbook myExcelBook = null;
 
@@ -82,4 +88,46 @@ public class Files {
 
         return result;
     }
+
+    public static String readDocxFromPath(String path) {
+        String result = "";
+
+        try {
+            File file = new File(path);
+            FileInputStream fis = new FileInputStream(file.getAbsolutePath());
+            XWPFDocument document = new XWPFDocument(fis);
+            List<XWPFParagraph> paragraphs = document.getParagraphs();
+
+            for (XWPFParagraph para : paragraphs) {
+                result += para.getText().toString();
+            }
+
+            fis.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public static String readDocFromPath(String path) {
+        String result = "";
+        File file = null;
+        WordExtractor extractor = null;
+
+        try {
+            file = new File(path);
+            FileInputStream fis = new FileInputStream(file.getAbsolutePath());
+            HWPFDocument document = new HWPFDocument(fis);
+            extractor = new WordExtractor(document);
+            String[] fileData = extractor.getParagraphText();
+            for (int i = 0; i < fileData.length; i++) {
+                if (fileData[i] != null)
+                    result += fileData[i].toString();
+            }
+        } catch (Exception exep) {
+            exep.printStackTrace();
+        }
+        return result;
+    }
+
 }
