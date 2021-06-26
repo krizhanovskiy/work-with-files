@@ -24,4 +24,13 @@ public class DocFileTests {
         String actualData = readDocFromPath(docFilePath);
         assertThat(actualData, containsString(expectedData));
     }
+
+    @Test
+    void docTest2() {
+        String docFilePath = "./src/test/resources/files/work_with_file_in_java.doc";
+        String expectedData = "test work with doc file";
+
+        String actualData = readDocFromPath(docFilePath);
+        assertThat(actualData, containsString(expectedData));
+    }
 }
